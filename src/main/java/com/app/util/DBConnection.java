@@ -13,21 +13,20 @@ public class DBConnection {
             String user = System.getenv("MYSQLUSER");
             String pass = System.getenv("MYSQLPASSWORD");
 
-          
             if (host == null || port == null || db == null || user == null || pass == null) {
                 throw new RuntimeException("Database environment variables are missing");
             }
 
-            String url = "jdbc:mysql://" + host + ":" + port + "/" + db
-                    + "?useSSL=true"
-                    + "&requireSSL=true"
-                    + "&verifyServerCertificate=false"
-                    + "&allowPublicKeyRetrieval=true";
+            String url =
+                "jdbc:mysql://" + host + ":" + port + "/" + db +
+                "?useSSL=false" +
+                "&allowPublicKeyRetrieval=true" +
+                "&serverTimezone=UTC" +
+                "&connectTimeout=10000";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection con = DriverManager.getConnection(url, user, pass);
-
             System.out.println("Database connected successfully");
             return con;
 
