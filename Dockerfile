@@ -1,10 +1,10 @@
-FROM tomcat:10-jdk17
+FROM tomcat:10.1-jdk17
 
-# remove default ROOT app
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# Remove default Tomcat apps
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# copy your WAR file
-COPY target/Final_Delivery_Project.war/usr/local/tomcat/webapps/ROOT.war
+# Copy WAR file
+COPY target/feasto.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 
